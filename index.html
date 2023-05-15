@@ -34,47 +34,52 @@
 
     <div class="enigme" id="e0">
         <button class="start">Commencer</button>
-
     </div>
 
-
+    
+    
     <div class="enigme" id="e1">
         <h1>
             999
         </h1>
-
         <div class="inputs" code="999"></div>
-        
     </div>
-
-
+    
+    
     <div class="enigme" id="e2">
         <h1>
             5555
         </h1>
-
         <div class="inputs" code="5555"></div>
-        
     </div>
-
-
+    
+    
     <div class="enigme" id="e3">
         <h1>
             77777
         </h1>
-
         <div class="inputs" code="77777"></div>
-    
     </div>
 
+    
+    <div class="enigme" id="e4">
+        <button class="end">Fin</button>
+    </div>
+    
+    
     <script>
         let eid = 0;
-
+        
         document.querySelector("button.start").addEventListener("click", function () {
             eid++;
             updateUI();
-        });
+        });        
 
+        document.querySelector("button.end").addEventListener("click", function () {
+            eid = 0;
+            updateUI();
+        });
+        
         // loop throgh div with the class inputs
         let inputs = document.querySelectorAll(".inputs");
         for (let i = 0; i < inputs.length; i++) {
