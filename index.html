@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Les secrets de Mathilde</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!-- <link rel='stylesheet' type='text/css' media='screen' href='main.css'> -->
+    <!-- <script src='main.js'></script> -->
+</head>
+<body>
+    
+
+    <style>
+        body{
+            background-color: #F5F5F5;
+        }
+        .enigme{
+            background-color: #FFFFFF;
+            width: 80%;
+            margin: auto;
+            margin-top: 10%;
+            padding: 5%;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+        }
+        h1{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 1.5em;
+            text-align: center;
+        }
+    </style>
+
+
+    <div class="enigme" id="e0">
+        <button class="start">Commencer</button>
+
+    </div>
+
+
+    <div class="enigme" id="e1">
+        <h1>
+            999
+        </h1>
+
+        <div class="inputs" code="999"></div>
+        
+    </div>
+
+
+    <div class="enigme" id="e2">
+        <h1>
+            5555
+        </h1>
+
+        <div class="inputs" code="5555"></div>
+        
+    </div>
+
+
+    <div class="enigme" id="e3">
+        <h1>
+            77777
+        </h1>
+
+        <div class="inputs" code="77777"></div>
+
+    <script>
+        let eid = 0;
+
+        document.querySelector("button.start").addEventListener("click", function () {
+            eid++;
+            updateUI();
+        });
+
+        // loop throgh div with the class inputs
+        let inputs = document.querySelectorAll(".inputs");
+        for (let i = 0; i < inputs.length; i++) {
+            // get the code from the div
+            console.log(inputs[i].getAttribute("code").length);
+            let code = inputs[i].getAttribute("code");
+            // create 4 inputs and append them to the div
+            for (let j = 0; j < code.length; j++) {
+                let input = document.createElement("input");
+                input.setAttribute("type", "text");
+                input.setAttribute("maxlength", "1");
+                input.setAttribute("size", "1");
+                input.setAttribute("id", "input" + j);
+                input.setAttribute("class", "input");
+                inputs[i].appendChild(input);
+                // when the input is filled, focus on the next one and override the value
+                input.addEventListener("keyup", function(){
+                    if (this.value.length == this.maxLength) {
+                        let next = this.nextElementSibling;
+                        if (next != null) {
+                            next.focus();
+                        } else {
+                            this.blur();
+                            checkcode();
+                        }
+                        this.value = this.value.toUpperCase();
+                    }
+                });
+            }
+        }
+
+
+        updateUI();
+
+        function checkcode() {
+            // get the code from the div with the id e1
+            let code = document.getElementById("e" + eid).querySelector(".inputs").getAttribute("code");
+            // get the inputs from the div with the id e1
+            let inputs = document.getElementById("e" + eid).querySelectorAll(".input");
+            // create a variable to store the value of the inputs
+            let value = "";
+            // loop through the inputs
+            for (let i = 0; i < inputs.length; i++) {
+                // add the value of the input to the variable
+                value += inputs[i].value;
+            }
+            // check if the value is the same as the code
+            console.log(code + " " + value);
+            if (code == value) {
+                eid++;
+                updateUI();
+            } else {
+                for (let i = 0; i < inputs.length; i++) {
+                    inputs[i].value = "";
+                }
+            }
+        }
+
+
+        function updateUI() {
+            // loop through all the divs with the class enigme
+            let enigmes = document.querySelectorAll(".enigme");
+            for (let i = 0; i < enigmes.length; i++) {
+                // hide all the divs
+                enigmes[i].style.display = "none";
+            }
+            // show the div with the id e1
+            document.getElementById("e" + eid).style.display = "block";
+        }
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- script qui reload la page toutes les 1 secondes -->
+    <script>
+        // setTimeout(function(){
+        //     window.location.reload(1);
+        // }, 1000);
+    </script>
+
+</body>
+</html>
