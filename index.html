@@ -12,23 +12,45 @@
     
 
     <style>
+        *{
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
         body{
             background-color: #F5F5F5;
+            background-image: url(parchemin.jpg);
         }
         .enigme{
-            background-color: #FFFFFF;
-            width: 80%;
-            margin: auto;
-            margin-top: 10%;
-            padding: 5%;
+            padding-top: 25%;
+            width: 100vw;
+            height: 100vh;
             border-radius: 10px;
-            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+            text-align: center;
         }
         h1{
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             font-size: 1.5em;
             text-align: center;
+            margin-bottom: 50px;
         }
+        .start{
+            background-color: rgba(0, 0, 0, 0);
+            border: 2px solid black;
+            width: 100px;
+            height: 50px;
+        }
+
+        input{
+            margin: 10px;
+            height: 50px;
+            width: 30px;
+            background-color: #3f3c2350;
+            border: solid 1px black;
+            text-align: center;
+            border-radius: 5px;
+        }
+
     </style>
 
 
@@ -68,6 +90,8 @@
     
     
     <script>
+
+
         let eid = 0;
         
         document.querySelector("button.start").addEventListener("click", function () {
@@ -112,6 +136,17 @@
         }
 
 
+        function wrongAnim(){
+            let inputs = document.querySelectorAll("input");
+            for (let i = 0; i < inputs.length; i++) {
+                inputs[i].style.backgroundColor = "#a81a1a";
+                setTimeout(function(){
+                    inputs[i].style.backgroundColor = "#3f3c2350";
+                }, 500);
+            }
+
+        }
+
         updateUI();
 
         function checkcode() {
@@ -132,6 +167,7 @@
                 eid++;
                 updateUI();
             } else {
+                wrongAnim();
                 for (let i = 0; i < inputs.length; i++) {
                     inputs[i].value = "";
                 }
