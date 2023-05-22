@@ -202,6 +202,11 @@
 
         function updateUI() {
             // loop through all the divs with the class enigme
+            // clear all inputs
+            let inputs = document.querySelectorAll(".input");
+            for (let i = 0; i < inputs.length; i++) {
+                inputs[i].value = "";
+            }
             let enigmes = document.querySelectorAll(".enigme");
             for (let i = 0; i < enigmes.length; i++) {
                 // hide all the divs
