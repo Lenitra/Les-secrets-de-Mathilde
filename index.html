@@ -51,6 +51,21 @@
             border-radius: 5px;
         }
 
+        /* shake animatio */
+        @keyframes shake {
+            0% { transform: translate(1px, 0px); }
+            10% { transform: translate(-1px, 0px); }
+            20% { transform: translate(-3px, 0px); }
+            30% { transform: translate(3px, 0px); }
+            40% { transform: translate(1px, 0px); }
+            50% { transform: translate(-1px, 0px); }
+            60% { transform: translate(-3px, 0px); }
+            70% { transform: translate(3px, 0px); }
+            80% { transform: translate(-1px, 0px); }
+            90% { transform: translate(1px, 0px); }
+            100% { transform: translate(1px, 0px); }
+        }
+
     </style>
 
 
@@ -85,6 +100,7 @@
 
     
     <div class="enigme" id="e4">
+        <h1>Bravo vous avez réussi !</h1>
         <button class="end">Fin</button>
     </div>
     
@@ -140,10 +156,17 @@
             let inputs = document.querySelectorAll("input");
             for (let i = 0; i < inputs.length; i++) {
                 inputs[i].style.backgroundColor = "#a81a1a";
+                inputs[i].style.animation = "shake 1s";
+                
+                setTimeout(function () {
+                    inputs[i].style.animation = "";
+                }, 1000);
+
                 setTimeout(function(){
                     inputs[i].style.backgroundColor = "#3f3c2350";
                 }, 500);
             }
+
 
         }
 
@@ -171,6 +194,8 @@
                 for (let i = 0; i < inputs.length; i++) {
                     inputs[i].value = "";
                 }
+                // refocus on the first input
+                inputs[0].focus();
             }
         }
 
@@ -184,26 +209,13 @@
             }
             // show the div with the id e1
             document.getElementById("e" + eid).style.display = "block";
+            // focus on the first input
+            document.getElementById("e" + eid).querySelector(".input").focus();
         }
     </script>
 
 
 
-
-
-
-
-
-
-
-
-
-    <!-- script qui reload la page toutes les 1 secondes -->
-    <script>
-        // setTimeout(function(){
-        //     window.location.reload(1);
-        // }, 1000);
-    </script>
 
 </body>
 </html>
