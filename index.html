@@ -39,6 +39,8 @@
             font-size: 2.5em;
             text-align: center;
             margin-bottom: 50px;
+            padding-left: 10%;
+            padding-right: 10%;
         }
         .start{
             background-color: rgba(0, 0, 0, 0);
@@ -72,10 +74,23 @@
             100% { transform: translate(1px, 0px); }
         }
 
+
+        .hint {
+            position: absolute;
+            top: 50px;
+            left: 50%;
+        }
     </style>
 
+    <button class="hint">
+        indice
+    </button>
+    <h3 id="hinttext">INDICES</h3>
 
     <div class="enigme" id="e0">
+        <h1>
+            Bienvenue dans la tour Mathilde, via ces égnimes vous allez découvrir les étapes clés de la vie de Mathilde de Flandre.
+        </h1>
         <button class="start">Commencer</button>
     </div>
 
@@ -83,29 +98,53 @@
     
     <div class="enigme" id="e1">
         <h1>
-            Juste un petit test : <br> Il y a combien de berceaux dans cette pièce ?
+            Elle est née bien après pourtant elle indique (déjà) l'an de son premier cri.
         </h1>
-        <div class="inputs" code="3"></div>
+        <div class="inputs" code="1031"></div>
     </div>
     
     
     <div class="enigme" id="e2">
         <h1>
-            5555
+            Cousins 5e degré, pape pas d'accord 
+            <br>
+            Guillaume et Mathilde sont contraints à deux travaux... Une demie lieue séparent celle de Mathilde de celle de Guillaume.
         </h1>
-        <div class="inputs" code="5555"></div>
+        <div class="inputs" code="C5"></div>
     </div>
     
     
     <div class="enigme" id="e3">
         <h1>
-            77777
+            Du haut de leur tour le roi et la reine contemple leur nombreux descendance 
         </h1>
-        <div class="inputs" code="77777"></div>
+        <div class="inputs" code="8"></div>
     </div>
 
     
     <div class="enigme" id="e4">
+        <h1>
+            Offert par Mathilde, Guillaume part conquérir l'Angleterre sur son dragon des mers. 
+        </h1>
+        <div class="inputs" code="MORA"></div>
+    </div>
+
+    <div class="enigme" id="e5">
+        <h1>
+            Guillaume a gagné il devient roi d'Angleterre. Maintenant mettez vous à genoux devant la reine.
+        </h1>
+        <div class="inputs" code="WESTMINSTER"></div>
+    </div>
+
+    <div class="enigme" id="e6">
+        <h1>
+            Cette année-là la reine s'éteint, mais la Normandie s'en souvient.
+        </h1>
+        <div class="inputs" code="1083"></div>
+    </div>
+
+    
+    <div class="enigme" id="e7">
         <h1>Bravo vous avez réussi !</h1>
         <button class="end">Fin</button>
     </div>
@@ -190,6 +229,7 @@
                 // add the value of the input to the variable
                 value += inputs[i].value;
             }
+            value = value.toUpperCase();
             // check if the value is the same as the code
             console.log(code + " " + value);
             if (code == value) {
@@ -224,18 +264,45 @@
             // make a transition with the text 
             let text = document.getElementById("e" + eid).querySelector("h1");
             text.style.opacity = "0";
-            for (let i = 0; i < 10; i++) {
+            for (let i = 0; i < 20; i++) {
                 setTimeout(function () {
-                    text.style.opacity = i / 10;
+                    text.style.opacity = i / 20;
                 }, i * 100);
             }
-
+            
+            document.querySelector(".hint").style.display = "none";
+            document.getElementById("hinttext").style.display = "none";
+            if (eid != 0 && eid != 7) {
+                // make the class hint visible after 5 seconds
+                setTimeout(function () {
+                    document.querySelector(".hint").style.display = "block";
+                }, 5000);
+            }
 
 
 
             // focus on the first input
             document.getElementById("e" + eid).querySelector(".input").focus();
         }
+
+
+        // on click on the hint button
+        document.querySelector("button.hint").addEventListener("click", function () {
+            // cancel the event
+            event.preventDefault();
+            console.log("hint");
+            // let hint = "";
+            // switch (eid) {
+            //     case 1:
+            //         hint = "Tic Tac";
+            //         break;
+                    
+            //     default:
+            //         break;
+            // }
+            document.getElementById("hinttext").style.display = "block";
+            document.getElementById("hinttext").textContent = hint;
+        });
     </script>
 
 
