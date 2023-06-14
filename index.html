@@ -28,9 +28,9 @@
             background-image: url(parchemin.jpg);
         }
         .enigme{
-            margin-top: 35vh;
+            margin-top: 25vh;
             width: 100vw;
-            height: 50vh;
+            height: 70vh;
             border-radius: 10px;
             text-align: center;
         }
@@ -53,11 +53,19 @@
             /* interligne */
             line-height: 1.75em;
         }
-        .start, .end{
+        .end{
             background-color: rgba(0, 0, 0, 0);
             border: 2px solid black;
             width: 100px;
             height: 50px;
+        }
+        .start {
+            background-color: rgba(0, 0, 0, 0);
+            border: none;
+            font-size: 0;
+            /* width: 25vw; */
+            /* height: 10vh; */
+            cursor: pointer;
         }
 
         input{
@@ -85,6 +93,8 @@
             100% { transform: translate(1px, 0px); }
         }
 
+        
+
 
         .hint {
             position: absolute;
@@ -95,12 +105,15 @@
         #e0 img{
             width: 30%;
         }
+        .start img{
+            width: 200px;
+            height: auto;
+        }
     </style>
 
 
 
     <div class="enigme" id="e0">
-        <!-- <img src="logo.png" alt=""> -->
         <h1>
             Bienvenue à la Tour Mathilde et ses nombreux mystères.
             <br>
@@ -108,7 +121,7 @@
             <br>
             Es-tu prêt ?
         </h1>
-        <button class="start">Prêt !</button>
+        <button class="start"><img src="arrow.png" alt=""></button>
     </div>
     
     
@@ -123,7 +136,7 @@
             <h2>
                 Mathilde de Flandre est née vers 1031. Fille du comte Baudouin V de Flandre, elle descend de Charlemagne mais également la petite-fille du roi capétien Robert II le Pieux (996-1031).
             </h2>
-            <button class="start">Continuer</button>
+        <button class="start"><img src="arrow.png" alt=""></button>
         </div>
     </div>
     
@@ -140,7 +153,7 @@
             <h2>
                 Mathilde fonde l'abbaye aux Dames de Caen, dédiée à la Sainte-Trinité à l'Est du Château. Son époux fonde l'abbaye aux Hommes, dédiée à saint Étienne, cette fois-ci à l'Ouest du Château.
             </h2>
-            <button class="start">Continuer</button>
+            <button class="start"><img src="arrow.png" alt=""></button>
         </div>
     </div>
     
@@ -154,7 +167,7 @@
             <h2>
                 Guillaume et Mathilde ont eu huit enfants dont quatre garçons et quatre filles. Un neuvième enfant reste tout de même encore questionné dans leur descendance.
             </h2>
-            <button class="start">Continuer</button>
+            <button class="start"><img src="arrow.png" alt=""></button>
         </div>
     </div>
 
@@ -169,7 +182,7 @@
             <h2>
                 Mora est le nom traditionnellement attribué au « navire ducal » de Guillaume avec lequel il a traversé la Manche pour aller faire la conquête de l'Angleterre en 1066. Sa construction, selon une tradition, à Barfleur a été commandée par Mathilde de Flandre. Après la conquête, le navire a continué d'être utilisé par Guillaume le Conquérant pour ses allers-retours entre l'Angleterre et la Normandie.
             </h2>
-            <button class="start">Continuer</button>
+            <button class="start"><img src="arrow.png" alt=""></button>
         </div>
     </div>
 
@@ -182,7 +195,7 @@
             <h2>
                 Après la conquête de l'Angleterre par Guillaume Le Conquérant, Mathilde devient Reine en 1068 à Westminster. Elle apparaît, à partir de ce moment, sous le titre de "Regina" signifiant Reine.
             </h2>
-            <button class="start">Continuer</button>
+            <button class="start"><img src="arrow.png" alt=""></button>
         </div>
         
     </div>
@@ -196,7 +209,7 @@
             <h2>
                 Elle tombe malade à la fin de l'été 1083 et meurt le 2 novembre. Selon sa volonté, elle est inhumée dans l'église abbatiale de La Trinité (Abbaye aux Dames) de Caen. Sa tombe subsiste encore de nos jours, mais elle a été pillée par les protestants en 1562.
             </h2>
-            <button class="start">Continuer</button>
+            <button class="start"><img src="arrow.png" alt=""></button>
         </div>
     </div>
 
@@ -308,12 +321,24 @@
                 for (let i = 0; i < inputs.length; i++) {
                     inputs[i].style.display = "none";
                 }
+                
+                // let txtsoluce = document.querySelectorAll(".soluce")
+                // for (let i = 0; i < txtsoluce.length; i++) {
+                //     txtsoluce[i].style.display = "block";
+                // }
+                let opa = 0;
+                let soluce = document.getElementById("e" + eid).querySelector(".soluce");
+                soluce.style.opacity = opa;
+                soluce.style.display = "block";
+                let timer = setInterval(function () {
+                    if (opa >= 1) {
+                        clearInterval(timer);
+                    }
+                    opa += 0.05;
+                    soluce.style.opacity = opa;
+                }, 100);
 
 
-                let txtsoluce = document.querySelectorAll(".soluce")
-                for (let i = 0; i < txtsoluce.length; i++) {
-                    txtsoluce[i].style.display = "block";
-                }
 
             } else {
                 wrongAnim();
